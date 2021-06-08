@@ -51,25 +51,10 @@
 #define BLIGHT_LVL_1    7600    //lowest intensity   5%
 
 
-void LCD_StoreCustomChar(uint8_t *rows, uint8_t cgram_loc);
-void LCD_Clear          (void);
-void LCD_GotoXY         (int x, int y);
-void LCD_GotoYX         (int y, int x);
-void LCD_SetCursorHome  (void);
-void LCD_SetCursorBlink (bool enabled);
-void LCD_Putc           (char letter);
-void LCD_PutCustomChar  (uint8_t cgram_loc);
-void LCD_PutStr         (int y, int x, char *msg, bool clear);
-void LCD_BacklightSet   (int level);
-void LCD_Init           (bool mode);
-//void LCD_Init1          (void);   //deprecated
-//void LCD_Init2          (void);   //deprecated
-void LCD_IntroAnimation (void);
+void LCD_GotoYX(int y, int x);
+void LCD_putStr(int y, int x, uint8_t *msg, bool clear);
+void LCD_Init(bool mode);
 
-//#if defined(USE_LCD_EXTRA_FEATURES)
-//void LCD_BacklightFadeIn    (void);
-//void LCD_BacklightFadeOut   (void);
-//#endif
 
 
 #endif	/* LCD_H */

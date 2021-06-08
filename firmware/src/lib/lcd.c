@@ -1,3 +1,98 @@
+#include "system.h"
+#include "lcd.h"
+#include "pin_manager.h"
+
+//LCD initialization generic commands
+static const uint8_t lcd_init_cmds[2][9] = {
+    {0x38, 0x39, 0x14, 0x70, 0x5E, 0x6D, 0x0C, 0x01, 0x06}, //used when LCD_MODE_1
+    {0x34, 0x34, 0x14, 0x70, 0x5E, 0x6D, 0x00, 0x00, 0x00}, //used when LCD_MODE_2
+};
+
+static uint8_t buffer[64];
+
+static void sendCommand(uint8_t cmd)
+{
+    //for more info on commands, refer to st7036i controller
+    i2c_start();
+    i2c_sendByte(LCD_I2C_ADDR);
+    i2c_sendByte(LCD_CMD_CMD);
+    i2c_sendByte(cmd);
+    i2c_stop();
+}
+
+static void sendData(uint8_t data)
+{
+    i2c_start();
+    i2c_sendByte(LCD_I2C_ADDR);
+    i2c_sendByte(LCD_DATA_CMD);
+    i2c_sendByte(data);
+    i2c_stop();
+}
+
+void LCD_GotoYX(int y, int x)
+{
+    uint8_t cmd = 0x80 + ((y == 0) ? x : (0x40+x));
+    sendCommand(cmd);
+}
+
+void LCD_Clear(void)
+{
+    sendCommand(0x01);
+}
+
+void LCD_putStr(int y, int x, uint8_t *msg, bool clear)
+{
+    if(clear){
+        LCD_Clear();
+    }
+    
+    LCD_GotoYX(y,x);        
+    
+    i2c_start();
+    i2c_sendByte(LCD_I2C_ADDR);
+    i2c_sendByte(LCD_DATA_CMD);
+
+    do{
+        i2c_sendByte(*msg++);        
+    }while(*msg);
+    
+    i2c_stop();
+}
+
+
+void LCD_Init(bool mode)
+{
+    if(mode > LCD_MODE_2){
+        return;
+    }
+    
+    i2c_init();
+    
+    IO_LCDRST_SetHigh();
+    DELAY_milliseconds(100);
+    
+    i2c_start();
+    i2c_sendByte(LCD_I2C_ADDR);
+    i2c_sendByte(LCD_CMD_CMD);
+    i2c_sendByte(0x38);
+    DELAY_milliseconds(60);
+    i2c_sendByte(0x39);//8bits,line 2,instruction table 01(IS1)
+    DELAY_milliseconds(60);
+    i2c_sendByte(0x14);//IS1: 1/5 bias,FX not fixed
+    i2c_sendByte(0x70);//IS1: Contrast set for internal follower mode C3:C0 = 0
+    i2c_sendByte(0x5E);//IS1: ICON display on, Booster on,Contrast C5,C4=1,0
+    i2c_sendByte(0x6D);//IS1: Follower circuit on, follower circuit ratio
+    i2c_sendByte(0x0C);//Display on, cursor off,cursor position off
+    i2c_sendByte(0x01);//Clear display
+    i2c_sendByte(0x06);//Cursor direction, no display shif
+    DELAY_milliseconds(60);
+    i2c_stop();
+}
+
+
+
+
+
 ///********************************************************************
 // FileName:    	LCD.c
 // Dependencies: 	aguijon.h
@@ -48,20 +143,20 @@
 //static void LCD_Command(uint8_t cmd)
 //{
 //    //for more info on commands, refer to st7036i controller
-//    IO_I2Cstart();
-//    IO_I2CsendByte(LCD_I2C_ADDR);
-//    IO_I2CsendByte(LCD_CMD_CMD);
-//    IO_I2CsendByte(cmd);
-//    IO_I2Cstop();
+//    i2c_start();
+//    i2c_sendByte(LCD_I2C_ADDR);
+//    i2c_sendByte(LCD_CMD_CMD);
+//    i2c_sendByte(cmd);
+//    i2c_stop();
 //}
 //
 //static void LCD_Data(uint8_t data)
 //{
-//    IO_I2Cstart();
-//    IO_I2CsendByte(LCD_I2C_ADDR);
-//    IO_I2CsendByte(LCD_DATA_CMD);
-//    IO_I2CsendByte(data);
-//    IO_I2Cstop();
+//    i2c_start();
+//    i2c_sendByte(LCD_I2C_ADDR);
+//    i2c_sendByte(LCD_DATA_CMD);
+//    i2c_sendByte(data);
+//    i2c_stop();
 //}
 //
 //void LCD_StoreCustomChar(uint8_t *rows, uint8_t cgram_loc)
@@ -71,27 +166,27 @@
 //    if(cgram_loc >= 8) return; //we only have 8 (0-7) spaces at CGRAM
 //
 //    // Set up the display to write into CGRAM - configure LCD to use func table 0
-//    IO_I2Cstart();
-//    IO_I2CsendByte(LCD_I2C_ADDR);     //address
-//    IO_I2CsendByte(LCD_CMD_CMD);      //command
-//    IO_I2CsendByte(0x38);             //set to func table 0
-//    delayms(5);                         //wait for the LCD
+//    i2c_start();
+//    i2c_sendByte(LCD_I2C_ADDR);     //address
+//    i2c_sendByte(LCD_CMD_CMD);      //command
+//    i2c_sendByte(0x38);             //set to func table 0
+//    DELAY_milliseconds(5);                         //wait for the LCD
 //    //Set CGRAM position to write
-//    IO_I2CsendByte(0x40 + (cgram_loc*8));
-//    IO_I2Cstop();
+//    i2c_sendByte(0x40 + (cgram_loc*8));
+//    i2c_stop();
 //
-//    IO_I2Cstart();
-//    IO_I2CsendByte(0x78);
-//    IO_I2CsendByte(0x40);    //RS=1 (write data to ram)
+//    i2c_start();
+//    i2c_sendByte(0x78);
+//    i2c_sendByte(0x40);    //RS=1 (write data to ram)
 //
 //    //send the 8 rows of the uint8_tacter
 //    for(i=0;i<8;i++){
-//        IO_I2CsendByte(*rows); // write the current pointed row to CGRAM
+//        i2c_sendByte(*rows); // write the current pointed row to CGRAM
 //        rows++;             //increment the pointer
 //    }
 //
-//    IO_I2Cstop();
-//    delayms(1);
+//    i2c_stop();
+//    DELAY_milliseconds(1);
 //
 //    // Leave the LCD as it was - function table 1 DDRAM and set the cursor
 //    LCD_Command(0x39);
@@ -149,11 +244,11 @@
 //    /* the user must call: LCD_GotoXY or LCD_GotoYX and set the cursor before
 //     * calling this function, otherwise the letter will be displayed in the
 //     * current cursor position */
-//    IO_I2Cstart();
-//    IO_I2CsendByte(LCD_I2C_ADDR);
-//    IO_I2CsendByte(LCD_DATA_CMD);
-//    IO_I2CsendByte(letter);
-//    IO_I2Cstop();
+//    i2c_start();
+//    i2c_sendByte(LCD_I2C_ADDR);
+//    i2c_sendByte(LCD_DATA_CMD);
+//    i2c_sendByte(letter);
+//    i2c_stop();
 //}
 //
 //void LCD_PutCustomChar(uint8_t cgram_loc)
@@ -163,31 +258,31 @@
 //     * current cursor position */
 //    if(cgram_loc > 8){ return; }
 //    
-//    IO_I2Cstart();
-//    IO_I2CsendByte(LCD_I2C_ADDR);
-//    IO_I2CsendByte(LCD_DATA_CMD);
-//    IO_I2CsendByte(cgram_loc);
-//    IO_I2Cstop();
+//    i2c_start();
+//    i2c_sendByte(LCD_I2C_ADDR);
+//    i2c_sendByte(LCD_DATA_CMD);
+//    i2c_sendByte(cgram_loc);
+//    i2c_stop();
 //}
 //
 //void LCD_PutStr(int y, int x, uint8_t *msg, bool clear)
 //{
 //    if(clear){
 //        LCD_Clear();
-//        delayms(1);
+//        DELAY_milliseconds(1);
 //    }
 //
 //    LCD_GotoYX(y,x);
 //
-//    IO_I2Cstart();
-//    IO_I2CsendByte(LCD_I2C_ADDR);
-//    IO_I2CsendByte(LCD_DATA_CMD);
+//    i2c_start();
+//    i2c_sendByte(LCD_I2C_ADDR);
+//    i2c_sendByte(LCD_DATA_CMD);
 //
 //    while(*msg){
-//        IO_I2CsendByte(*msg);
+//        i2c_sendByte(*msg);
 //        msg++;
 //    }
-//    IO_I2Cstop();
+//    i2c_stop();
 //}
 //
 //void LCD_BacklightSet(int level)
@@ -214,29 +309,29 @@
 //    if(init_i2c){
 //        IO_I2Cinit();       //init i2c module
 //        init_i2c = false;   //i2c init done
-//        delayms(10);        //wait a bit
+//        DELAY_milliseconds(10);        //wait a bit
 //    }
 //
 //    if((mode == LCD_MODE_1) || (mode == LCD_MODE_2)){
 //        /*Reset LCD*/
 //        LCD_RESET_PIN = 1;
-//        delayms(10);
+//        DELAY_milliseconds(10);
 //
-//        IO_I2Cstart();  //start I2C comm
+//        i2c_start();  //start I2C comm
 //
-//        IO_I2CsendByte(LCD_I2C_ADDR);   //send LCD address
-//        IO_I2CsendByte(LCD_CMD_CMD);    //tell the lcd we will send a cmd
+//        i2c_sendByte(LCD_I2C_ADDR);   //send LCD address
+//        i2c_sendByte(LCD_CMD_CMD);    //tell the lcd we will send a cmd
 //
 //        for(i=0 ; i<9 ; i++){
-//            IO_I2CsendByte(lcd_init_cmds[mode][i]);
+//            i2c_sendByte(lcd_init_cmds[mode][i]);
 //
 //            //we need a delay only when the first two cmds are sent
-//            if(i <= 1){ delayms(10); }
+//            if(i <= 1){ DELAY_milliseconds(10); }
 //            else if(!lcd_init_cmds[mode][i]){ break; }//only 6 cmds are required for LCD_MODE_2, so exit
 //        }
-//        delayms(10);
+//        DELAY_milliseconds(10);
 //        
-//        IO_I2Cstop();
+//        i2c_stop();
 //    }
 //}
 //void LCD_IntroAnimation(void)
@@ -268,37 +363,37 @@
 //    LCD_PutStr(1,7,msg1,false);
 //
 //    /*Third, */
-//    delayms(500);
+//    DELAY_milliseconds(500);
 //}
 ////
 ////#if defined(USE_LCD_EXTRA_FEATURES)
 ////void LCD_BacklightFadeIn(void)
 ////{
 ////    LCD_BacklightSet(BLIGHT_LVL_OFF);
-////    delayms(50);
+////    DELAY_milliseconds(50);
 ////    LCD_BacklightSet(BLIGHT_LVL_1);
-////    delayms(50);
+////    DELAY_milliseconds(50);
 ////    LCD_BacklightSet(BLIGHT_LVL_2);
-////    delayms(50);
+////    DELAY_milliseconds(50);
 ////    LCD_BacklightSet(BLIGHT_LVL_3);
-////    delayms(50);
+////    DELAY_milliseconds(50);
 ////    LCD_BacklightSet(BLIGHT_LVL_4);
-////    delayms(50);
+////    DELAY_milliseconds(50);
 ////    LCD_BacklightSet(BLIGHT_LVL_5);
 ////}
 ////
 ////void LCD_BacklightFadeOut(void)
 ////{
 ////    LCD_BacklightSet(BLIGHT_LVL_5);
-////    delayms(50);
+////    DELAY_milliseconds(50);
 ////    LCD_BacklightSet(BLIGHT_LVL_4);
-////    delayms(50);
+////    DELAY_milliseconds(50);
 ////    LCD_BacklightSet(BLIGHT_LVL_3);
-////    delayms(50);
+////    DELAY_milliseconds(50);
 ////    LCD_BacklightSet(BLIGHT_LVL_2);
-////    delayms(50);
+////    DELAY_milliseconds(50);
 ////    LCD_BacklightSet(BLIGHT_LVL_1);
-////    delayms(50);
+////    DELAY_milliseconds(50);
 ////    LCD_BacklightSet(BLIGHT_LVL_OFF);
 ////}
 ////#endif

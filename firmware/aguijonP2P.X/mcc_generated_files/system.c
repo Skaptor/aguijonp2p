@@ -51,10 +51,10 @@
 #pragma config WPEND = WPENDMEM    //Segment Write Protection End Page Select bit->Write Protect from WPFP to the last page of memory
 
 // CONFIG2
-#pragma config POSCMOD = NONE    //Primary Oscillator Select->Primary oscillator disabled
+#pragma config POSCMOD = XT    //Primary Oscillator Select->XT oscillator mode selected
 #pragma config DISUVREG = OFF    //Internal USB 3.3V Regulator Disable bit->Regulator is disabled
 #pragma config IOL1WAY = ON    //IOLOCK One-Way Set Enable bit->Write RP Registers Once
-#pragma config OSCIOFNC = OFF    //Primary Oscillator Output Function->OSCO functions as CLKO (FOSC/2)
+#pragma config OSCIOFNC = ON    //Primary Oscillator Output Function->OSCO functions as port I/O (RC15)
 #pragma config FCKSM = CSECMD    //Clock Switching and Monitor->Clock switching is enabled, Fail-safe Clock Monitor is disabled
 #pragma config FNOSC = FRC    //Oscillator Select->FRC
 #pragma config PLL_96MHZ = ON    //96MHz PLL Disable->Enabled
@@ -75,10 +75,10 @@
 #include "pin_manager.h"
 #include "clock.h"
 #include "system.h"
-#include "i2c2_driver.h"
+#include "uart1.h"
+#include "delay.h"
 #include "interrupt_manager.h"
 #include "traps.h"
-#include "uart1.h"
 
 void SYSTEM_Initialize(void)
 {

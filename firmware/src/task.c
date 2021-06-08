@@ -81,7 +81,7 @@ bool freezer_feature(void)
         if(switch_val == 2)
         {
             printf((char *)"Restoring Network !!");
-            DELAY_ms(1000);
+//            DELAY_ms(1000);
             return_val = true;
             break;
         }

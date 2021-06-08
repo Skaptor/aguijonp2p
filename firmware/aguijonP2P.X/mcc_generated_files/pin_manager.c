@@ -62,7 +62,7 @@ void PIN_MANAGER_Initialize (void)
      * Setting the Output Latch SFR(s)
      ***************************************************************************/
     LATA = 0x0000;
-    LATB = 0x0000;
+    LATB = 0xC200;
     LATC = 0x0000;
     LATD = 0x0000;
     LATE = 0x0000;
@@ -73,12 +73,12 @@ void PIN_MANAGER_Initialize (void)
      * Setting the GPIO Direction SFR(s)
      ***************************************************************************/
     TRISA = 0xC200;
-    TRISB = 0xFDFF;
+    TRISB = 0x3DFF;
     TRISC = 0x3008;
     TRISD = 0x8F30;
     TRISE = 0x0300;
     TRISF = 0x013C;
-    TRISG = 0x03CD;
+    TRISG = 0x038D;
 
     /****************************************************************************
      * Setting the Weak Pull Up and Weak Pull Down SFR(s)
@@ -109,7 +109,7 @@ void PIN_MANAGER_Initialize (void)
      * Setting the Analog/Digital Configuration SFR(s)
      ***************************************************************************/
     AD1PCFGH = 0x0000;
-    AD1PCFGL = 0x3FC0;
+    AD1PCFGL = 0xFFC0;
     
     /****************************************************************************
      * Set the PPS

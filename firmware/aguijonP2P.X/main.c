@@ -1,13 +1,25 @@
 #include "mcc_generated_files/system.h"
+#include "lcd.h"
+#include "pin_manager.h"
+#include "delay.h"
 
 
 int main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
-
-    while (1)
-    {
+    IO_LCDBL_SetHigh();
+    LCD_Init(LCD_MODE_1);
+    
+    uint8_t buffer[64] = {0};
+    uint8_t counter = 0;        
+    
+    for(;;){
+        sprintf(buffer, "adc=%i", counter++);
+        
+        LCD_putStr(0,0, buffer, false);
+        DELAY_milliseconds(250);
+        LATE ^= 0xFF;
         // Add your application code
     }
 

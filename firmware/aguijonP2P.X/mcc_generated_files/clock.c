@@ -48,8 +48,8 @@
 
 void CLOCK_Initialize(void)
 {
-    // CPDIV 1:1; RCDIV FRC/1; DOZE 1:8; DOZEN disabled; ROI disabled; 
-    CLKDIV = 0x3000;
+    // CPDIV 1:1; RCDIV FRC/2; DOZE 1:8; DOZEN disabled; ROI disabled; 
+    CLKDIV = 0x3100;
     // TUN Center frequency; 
     OSCTUN = 0x00;
     // ROEN disabled; ROSEL FOSC; RODIV 0; ROSSLP disabled; 
@@ -66,8 +66,8 @@ void CLOCK_Initialize(void)
     PMD5 = 0x00;
     // SPI3MD enabled; 
     PMD6 = 0x00;
-    // NOSC FRCPLL; SOSCEN enabled; POSCEN disabled; OSWEN Switch is Complete; 
-    __builtin_write_OSCCONH((uint8_t) (0x01));
+    // NOSC PRIPLL; SOSCEN enabled; POSCEN disabled; OSWEN Switch is Complete; 
+    __builtin_write_OSCCONH((uint8_t) (0x03));
     __builtin_write_OSCCONL((uint8_t) (0x03));
     // Wait for Clock switch to occur
     while (OSCCONbits.OSWEN != 0);

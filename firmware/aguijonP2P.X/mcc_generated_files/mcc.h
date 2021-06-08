@@ -51,10 +51,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "i2c2_driver.h"
+#include "uart1.h"
+#include "delay.h"
 #include "interrupt_manager.h"
 #include "traps.h"
-#include "uart1.h"
 
 #warning "This file will be removed in future MCC releases. Use system.h instead."
 

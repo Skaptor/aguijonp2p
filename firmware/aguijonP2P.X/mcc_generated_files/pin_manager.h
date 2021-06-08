@@ -932,6 +932,298 @@
 #define IO_DIPSW3_SetDigitalOutput() (_TRISB13 = 0)
 /**
   @Summary
+    Sets the GPIO pin, RB14, high using LATB14.
+
+  @Description
+    Sets the GPIO pin, RB14, high using LATB14.
+
+  @Preconditions
+    The RB14 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB14 high (1)
+    SCL_SetHigh();
+    </code>
+
+*/
+#define SCL_SetHigh()          (_LATB14 = 1)
+/**
+  @Summary
+    Sets the GPIO pin, RB14, low using LATB14.
+
+  @Description
+    Sets the GPIO pin, RB14, low using LATB14.
+
+  @Preconditions
+    The RB14 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB14 low (0)
+    SCL_SetLow();
+    </code>
+
+*/
+#define SCL_SetLow()           (_LATB14 = 0)
+/**
+  @Summary
+    Toggles the GPIO pin, RB14, using LATB14.
+
+  @Description
+    Toggles the GPIO pin, RB14, using LATB14.
+
+  @Preconditions
+    The RB14 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RB14
+    SCL_Toggle();
+    </code>
+
+*/
+#define SCL_Toggle()           (_LATB14 ^= 1)
+/**
+  @Summary
+    Reads the value of the GPIO pin, RB14.
+
+  @Description
+    Reads the value of the GPIO pin, RB14.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RB14
+    postValue = SCL_GetValue();
+    </code>
+
+*/
+#define SCL_GetValue()         _RB14
+/**
+  @Summary
+    Configures the GPIO pin, RB14, as an input.
+
+  @Description
+    Configures the GPIO pin, RB14, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB14 as an input
+    SCL_SetDigitalInput();
+    </code>
+
+*/
+#define SCL_SetDigitalInput()  (_TRISB14 = 1)
+/**
+  @Summary
+    Configures the GPIO pin, RB14, as an output.
+
+  @Description
+    Configures the GPIO pin, RB14, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB14 as an output
+    SCL_SetDigitalOutput();
+    </code>
+
+*/
+#define SCL_SetDigitalOutput() (_TRISB14 = 0)
+/**
+  @Summary
+    Sets the GPIO pin, RB15, high using LATB15.
+
+  @Description
+    Sets the GPIO pin, RB15, high using LATB15.
+
+  @Preconditions
+    The RB15 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB15 high (1)
+    SDA_SetHigh();
+    </code>
+
+*/
+#define SDA_SetHigh()          (_LATB15 = 1)
+/**
+  @Summary
+    Sets the GPIO pin, RB15, low using LATB15.
+
+  @Description
+    Sets the GPIO pin, RB15, low using LATB15.
+
+  @Preconditions
+    The RB15 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB15 low (0)
+    SDA_SetLow();
+    </code>
+
+*/
+#define SDA_SetLow()           (_LATB15 = 0)
+/**
+  @Summary
+    Toggles the GPIO pin, RB15, using LATB15.
+
+  @Description
+    Toggles the GPIO pin, RB15, using LATB15.
+
+  @Preconditions
+    The RB15 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RB15
+    SDA_Toggle();
+    </code>
+
+*/
+#define SDA_Toggle()           (_LATB15 ^= 1)
+/**
+  @Summary
+    Reads the value of the GPIO pin, RB15.
+
+  @Description
+    Reads the value of the GPIO pin, RB15.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RB15
+    postValue = SDA_GetValue();
+    </code>
+
+*/
+#define SDA_GetValue()         _RB15
+/**
+  @Summary
+    Configures the GPIO pin, RB15, as an input.
+
+  @Description
+    Configures the GPIO pin, RB15, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB15 as an input
+    SDA_SetDigitalInput();
+    </code>
+
+*/
+#define SDA_SetDigitalInput()  (_TRISB15 = 1)
+/**
+  @Summary
+    Configures the GPIO pin, RB15, as an output.
+
+  @Description
+    Configures the GPIO pin, RB15, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB15 as an output
+    SDA_SetDigitalOutput();
+    </code>
+
+*/
+#define SDA_SetDigitalOutput() (_TRISB15 = 0)
+/**
+  @Summary
     Sets the GPIO pin, RC1, high using LATC1.
 
   @Description
@@ -4580,6 +4872,152 @@
 
 */
 #define IO_USB5V_ENABLE_SetDigitalOutput() (_TRISG1 = 0)
+/**
+  @Summary
+    Sets the GPIO pin, RG6, high using LATG6.
+
+  @Description
+    Sets the GPIO pin, RG6, high using LATG6.
+
+  @Preconditions
+    The RG6 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RG6 high (1)
+    IO_LCDBL_SetHigh();
+    </code>
+
+*/
+#define IO_LCDBL_SetHigh()          (_LATG6 = 1)
+/**
+  @Summary
+    Sets the GPIO pin, RG6, low using LATG6.
+
+  @Description
+    Sets the GPIO pin, RG6, low using LATG6.
+
+  @Preconditions
+    The RG6 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RG6 low (0)
+    IO_LCDBL_SetLow();
+    </code>
+
+*/
+#define IO_LCDBL_SetLow()           (_LATG6 = 0)
+/**
+  @Summary
+    Toggles the GPIO pin, RG6, using LATG6.
+
+  @Description
+    Toggles the GPIO pin, RG6, using LATG6.
+
+  @Preconditions
+    The RG6 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RG6
+    IO_LCDBL_Toggle();
+    </code>
+
+*/
+#define IO_LCDBL_Toggle()           (_LATG6 ^= 1)
+/**
+  @Summary
+    Reads the value of the GPIO pin, RG6.
+
+  @Description
+    Reads the value of the GPIO pin, RG6.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RG6
+    postValue = IO_LCDBL_GetValue();
+    </code>
+
+*/
+#define IO_LCDBL_GetValue()         _RG6
+/**
+  @Summary
+    Configures the GPIO pin, RG6, as an input.
+
+  @Description
+    Configures the GPIO pin, RG6, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RG6 as an input
+    IO_LCDBL_SetDigitalInput();
+    </code>
+
+*/
+#define IO_LCDBL_SetDigitalInput()  (_TRISG6 = 1)
+/**
+  @Summary
+    Configures the GPIO pin, RG6, as an output.
+
+  @Description
+    Configures the GPIO pin, RG6, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RG6 as an output
+    IO_LCDBL_SetDigitalOutput();
+    </code>
+
+*/
+#define IO_LCDBL_SetDigitalOutput() (_TRISG6 = 0)
 
 /**
     Section: Function Prototypes
