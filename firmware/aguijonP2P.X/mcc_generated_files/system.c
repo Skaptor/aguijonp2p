@@ -79,12 +79,14 @@
 #include "delay.h"
 #include "interrupt_manager.h"
 #include "traps.h"
+#include "adc1.h"
 
 void SYSTEM_Initialize(void)
 {
     PIN_MANAGER_Initialize();
     CLOCK_Initialize();
     INTERRUPT_Initialize();
+    ADC1_Initialize();
     UART1_Initialize();
 }
 

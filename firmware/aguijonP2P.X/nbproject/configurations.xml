@@ -27,6 +27,7 @@
         <itemPath>../src/lib/lcd.h</itemPath>
         <itemPath>../src/lib/24LC01.h</itemPath>
         <itemPath>../src/lib/i2c.h</itemPath>
+        <itemPath>../src/lib/adc.h</itemPath>
       </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
@@ -39,6 +40,7 @@
         <itemPath>mcc_generated_files/mcc.h</itemPath>
         <itemPath>mcc_generated_files/uart1.h</itemPath>
         <itemPath>mcc_generated_files/delay.h</itemPath>
+        <itemPath>mcc_generated_files/adc1.h</itemPath>
       </logicalFolder>
       <logicalFolder name="system_config"
                      displayName="system_config"
@@ -79,6 +81,7 @@
         <itemPath>../src/lib/lcd.c</itemPath>
         <itemPath>../src/lib/i2c.c</itemPath>
         <itemPath>../src/lib/24LC01.c</itemPath>
+        <itemPath>../src/lib/adc.c</itemPath>
       </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
@@ -94,6 +97,7 @@
         <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
         <itemPath>mcc_generated_files/uart1.c</itemPath>
         <itemPath>mcc_generated_files/delay.c</itemPath>
+        <itemPath>mcc_generated_files/adc1.c</itemPath>
       </logicalFolder>
       <logicalFolder name="system_config"
                      displayName="system_config"

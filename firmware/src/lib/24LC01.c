@@ -3,7 +3,7 @@
 #include "24LC01.h"
 
 
-static void readSingleAddress(uint8_t address)
+static uint8_t readSingleAddress(uint8_t address)
 {
     uint8_t data = 0;
     

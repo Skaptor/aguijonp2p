@@ -2,6 +2,9 @@
 #include "lcd.h"
 #include "pin_manager.h"
 #include "delay.h"
+#include "adc.h"
+#include "i2c.h"
+#include "adc1.h"
 
 
 int main(void)
@@ -10,6 +13,7 @@ int main(void)
     SYSTEM_Initialize();
     
     i2c_init();
+//    adc_init();
     
     IO_LCDBL_SetHigh();
     LCD_Init(LCD_MODE_1);
@@ -26,10 +30,10 @@ int main(void)
     uint8_t counter = 0;        
     
     for(;;){
-        sprintf(buffer, "adc=%i", counter++);
+        sprintf(buffer, "adc=%.4i", adc_read(AN3_POT));
         
         LCD_putStr(0,0, buffer, false);
-        DELAY_milliseconds(250);
+        DELAY_milliseconds(50);
         LATE ^= 0xFF;
         // Add your application code
     }

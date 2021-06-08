@@ -1224,6 +1224,152 @@
 #define SDA_SetDigitalOutput() (_TRISB15 = 0)
 /**
   @Summary
+    Sets the GPIO pin, RB3, high using LATB3.
+
+  @Description
+    Sets the GPIO pin, RB3, high using LATB3.
+
+  @Preconditions
+    The RB3 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB3 high (1)
+    AN3_POT_SetHigh();
+    </code>
+
+*/
+#define AN3_POT_SetHigh()          (_LATB3 = 1)
+/**
+  @Summary
+    Sets the GPIO pin, RB3, low using LATB3.
+
+  @Description
+    Sets the GPIO pin, RB3, low using LATB3.
+
+  @Preconditions
+    The RB3 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB3 low (0)
+    AN3_POT_SetLow();
+    </code>
+
+*/
+#define AN3_POT_SetLow()           (_LATB3 = 0)
+/**
+  @Summary
+    Toggles the GPIO pin, RB3, using LATB3.
+
+  @Description
+    Toggles the GPIO pin, RB3, using LATB3.
+
+  @Preconditions
+    The RB3 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RB3
+    AN3_POT_Toggle();
+    </code>
+
+*/
+#define AN3_POT_Toggle()           (_LATB3 ^= 1)
+/**
+  @Summary
+    Reads the value of the GPIO pin, RB3.
+
+  @Description
+    Reads the value of the GPIO pin, RB3.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RB3
+    postValue = AN3_POT_GetValue();
+    </code>
+
+*/
+#define AN3_POT_GetValue()         _RB3
+/**
+  @Summary
+    Configures the GPIO pin, RB3, as an input.
+
+  @Description
+    Configures the GPIO pin, RB3, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB3 as an input
+    AN3_POT_SetDigitalInput();
+    </code>
+
+*/
+#define AN3_POT_SetDigitalInput()  (_TRISB3 = 1)
+/**
+  @Summary
+    Configures the GPIO pin, RB3, as an output.
+
+  @Description
+    Configures the GPIO pin, RB3, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB3 as an output
+    AN3_POT_SetDigitalOutput();
+    </code>
+
+*/
+#define AN3_POT_SetDigitalOutput() (_TRISB3 = 0)
+/**
+  @Summary
     Sets the GPIO pin, RC1, high using LATC1.
 
   @Description
