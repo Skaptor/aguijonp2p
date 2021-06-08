@@ -86,7 +86,7 @@ void CONSOLE_PutString(char* str)
 {
     uint8_t c;
 
-    while( c = * str++)
+    while(( c = * str++))
         CONSOLE_Put(c);
 }
 

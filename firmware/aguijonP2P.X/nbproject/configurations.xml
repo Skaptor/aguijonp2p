@@ -22,6 +22,23 @@
           <itemPath>../../../../../../framework/miwi/miwi_p2p.h</itemPath>
         </logicalFolder>
       </logicalFolder>
+      <logicalFolder name="f1" displayName="lib" projectFiles="true">
+        <itemPath>../src/lib/bsp.h</itemPath>
+        <itemPath>../src/lib/lcd.c</itemPath>
+        <itemPath>../src/lib/lcd.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="MCC Generated Files"
+                     displayName="MCC Generated Files"
+                     projectFiles="true">
+        <itemPath>mcc_generated_files/system.h</itemPath>
+        <itemPath>mcc_generated_files/interrupt_manager.h</itemPath>
+        <itemPath>mcc_generated_files/pin_manager.h</itemPath>
+        <itemPath>mcc_generated_files/clock.h</itemPath>
+        <itemPath>mcc_generated_files/traps.h</itemPath>
+        <itemPath>mcc_generated_files/mcc.h</itemPath>
+        <itemPath>mcc_generated_files/uart1.h</itemPath>
+        <itemPath>mcc_generated_files/i2c2_driver.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="system_config"
                      displayName="system_config"
                      projectFiles="true">
@@ -31,6 +48,7 @@
       <itemPath>../src/demo_output.h</itemPath>
       <itemPath>../src/p2p_demo.h</itemPath>
       <itemPath>../src/task.h</itemPath>
+      <itemPath>definitions.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -56,6 +74,18 @@
           <itemPath>../../../../../../framework/miwi/src/miwi_p2p.c</itemPath>
         </logicalFolder>
       </logicalFolder>
+      <logicalFolder name="MCC Generated Files"
+                     displayName="MCC Generated Files"
+                     projectFiles="true">
+        <itemPath>mcc_generated_files/pin_manager.c</itemPath>
+        <itemPath>mcc_generated_files/mcc.c</itemPath>
+        <itemPath>mcc_generated_files/clock.c</itemPath>
+        <itemPath>mcc_generated_files/traps.c</itemPath>
+        <itemPath>mcc_generated_files/system.c</itemPath>
+        <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
+        <itemPath>mcc_generated_files/uart1.c</itemPath>
+        <itemPath>mcc_generated_files/i2c2_driver.c</itemPath>
+      </logicalFolder>
       <logicalFolder name="system_config"
                      displayName="system_config"
                      projectFiles="true">
@@ -65,18 +95,19 @@
           <itemPath>../src/system_config/miwi/eeprom.c</itemPath>
           <itemPath>../src/system_config/miwi/spi.c</itemPath>
           <itemPath>../src/system_config/miwi/symbol.c</itemPath>
-          <itemPath>../src/system_config/miwi/system.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>../src/demo_ouput.c</itemPath>
-      <itemPath>../src/main.c</itemPath>
       <itemPath>../src/p2p_demo.c</itemPath>
       <itemPath>../src/task.c</itemPath>
+      <itemPath>main.c</itemPath>
+      <itemPath>../src/mainmiwi.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
+      <itemPath>aguijonP2P.mc3</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -319,7 +350,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../../../../../../framework;../src/system_config/miwi;../../src"/>
+                  value="../src;../../../../../../framework;../src/system_config/miwi;../../src;..\src\lib;mcc_generated_files"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>

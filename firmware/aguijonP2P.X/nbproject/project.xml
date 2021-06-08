@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>aguijonRev4</name>
+            <name>aguijonP2P</name>
             <creation-uuid>4c0d529f-bc34-4f0b-8bd4-979693649c53</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
