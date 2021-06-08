@@ -24,10 +24,9 @@
       </logicalFolder>
       <logicalFolder name="f1" displayName="lib" projectFiles="true">
         <itemPath>../src/lib/bsp.h</itemPath>
-        <itemPath>../src/lib/lcd.c</itemPath>
         <itemPath>../src/lib/lcd.h</itemPath>
-        <itemPath>i2c.c</itemPath>
-        <itemPath>i2c.h</itemPath>
+        <itemPath>../src/lib/24LC01.h</itemPath>
+        <itemPath>../src/lib/i2c.h</itemPath>
       </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
@@ -77,6 +76,9 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f1" displayName="lib" projectFiles="true">
+        <itemPath>../src/lib/lcd.c</itemPath>
+        <itemPath>../src/lib/i2c.c</itemPath>
+        <itemPath>../src/lib/24LC01.c</itemPath>
       </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
@@ -98,7 +100,6 @@
                      projectFiles="true">
         <logicalFolder name="miwi" displayName="miwi" projectFiles="true">
           <itemPath>../src/system_config/miwi/console.c</itemPath>
-          <itemPath>../src/system_config/miwi/eeprom.c</itemPath>
           <itemPath>../src/system_config/miwi/spi.c</itemPath>
           <itemPath>../src/system_config/miwi/symbol.c</itemPath>
         </logicalFolder>

@@ -9,7 +9,6 @@
 #include "symbol.h"
 #include "timer.h"
 #include "delay.h"
-#include "eeprom.h"
 
 /************************ DATA TYPE *******************************/
 

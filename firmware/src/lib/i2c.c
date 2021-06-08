@@ -1,5 +1,5 @@
 #include <xc.h>
-#include "mcc_generated_files/system.h"
+#include "../mcc_generated_files/system.h"
 
 void i2c_idle(void)
 {
@@ -18,6 +18,19 @@ void i2c_stop(void)
     while(I2C2CONbits.PEN); // Wait till stop sequence is completed
 }
 
+void i2c_nack(void)
+{
+    I2C2CONbits.ACKDT = 1;
+    I2C2CONbits.ACKEN = 1;
+}
+
+void i2c_ack(void)
+{
+    I2C2CONbits.ACKDT = 0;
+    I2C2CONbits.ACKEN = 1;
+    while(I2C2CONbits.ACKEN);
+}
+
 void i2c_sendByte(uint8_t data)
 {    
     I2C2TRN = data;
@@ -27,11 +40,31 @@ void i2c_sendByte(uint8_t data)
     IFS3bits.MI2C2IF = 0;       // Clear interrupt flag
 }
 
+uint8_t i2c_readByte(bool ack)
+{
+    uint8_t data=0;
+
+    I2C2CONbits.RCEN   = 1;
+    while(I2C2CONbits.RCEN);
+    I2C2CONbits.RCEN   = 0;
+    I2C2STATbits.I2COV = 0;
+    data = I2C2RCV;
+
+    if(ack){
+        i2c_ack();
+    }
+
+    return data;
+}
+
+
+
 
 void i2c_init(void)
 {   
     I2C2BRG = 0x9D; //100kHz
-    I2C2CON = 0x8000; 
+//    I2C2CON = 0x8000; 
+    I2C2CON = 0xC220; 
     I2C2STAT = 0x00;
 }
 

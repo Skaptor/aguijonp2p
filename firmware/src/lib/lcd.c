@@ -1,6 +1,7 @@
 #include "system.h"
 #include "lcd.h"
 #include "pin_manager.h"
+#include "lib/i2c.h"
 
 //LCD initialization generic commands
 static const uint8_t lcd_init_cmds[2][9] = {
@@ -45,46 +46,53 @@ void LCD_putStr(int y, int x, uint8_t *msg, bool clear)
     if(clear){
         LCD_Clear();
     }
-    
-    LCD_GotoYX(y,x);        
-    
+
+    LCD_GotoYX(y,x);
+
     i2c_start();
     i2c_sendByte(LCD_I2C_ADDR);
     i2c_sendByte(LCD_DATA_CMD);
 
     do{
-        i2c_sendByte(*msg++);        
+        i2c_sendByte(*msg++);
     }while(*msg);
-    
+
     i2c_stop();
 }
 
 
 void LCD_Init(bool mode)
 {
-    if(mode > LCD_MODE_2){
-        return;
-    }
-    
-    i2c_init();
-    
     IO_LCDRST_SetHigh();
     DELAY_milliseconds(100);
-    
+
     i2c_start();
     i2c_sendByte(LCD_I2C_ADDR);
     i2c_sendByte(LCD_CMD_CMD);
-    i2c_sendByte(0x38);
-    DELAY_milliseconds(60);
-    i2c_sendByte(0x39);//8bits,line 2,instruction table 01(IS1)
-    DELAY_milliseconds(60);
-    i2c_sendByte(0x14);//IS1: 1/5 bias,FX not fixed
-    i2c_sendByte(0x70);//IS1: Contrast set for internal follower mode C3:C0 = 0
-    i2c_sendByte(0x5E);//IS1: ICON display on, Booster on,Contrast C5,C4=1,0
-    i2c_sendByte(0x6D);//IS1: Follower circuit on, follower circuit ratio
-    i2c_sendByte(0x0C);//Display on, cursor off,cursor position off
-    i2c_sendByte(0x01);//Clear display
-    i2c_sendByte(0x06);//Cursor direction, no display shif
+
+    if(mode == LCD_MODE_1){
+        i2c_sendByte(0x38);
+        DELAY_milliseconds(60);
+        i2c_sendByte(0x39);//8bits,line 2,instruction table 01(IS1)
+        DELAY_milliseconds(60);
+        i2c_sendByte(0x14);//IS1: 1/5 bias,FX not fixed
+        i2c_sendByte(0x70);//IS1: Contrast set for internal follower mode C3:C0 = 0
+        i2c_sendByte(0x5E);//IS1: ICON display on, Booster on,Contrast C5,C4=1,0
+        i2c_sendByte(0x6D);//IS1: Follower circuit on, follower circuit ratio
+        i2c_sendByte(0x0C);//Display on, cursor off,cursor position off
+        i2c_sendByte(0x01);//Clear display
+        i2c_sendByte(0x06);//Cursor direction, no display shift
+    }else{
+        i2c_sendByte(0x34);
+        DELAY_milliseconds(20);
+        i2c_sendByte(0x34);
+        DELAY_milliseconds(20);
+        i2c_sendByte(0x14);
+        i2c_sendByte(0x70);
+        i2c_sendByte(0x5E);
+        i2c_sendByte(0x6D);
+    }
+
     DELAY_milliseconds(60);
     i2c_stop();
 }
@@ -257,7 +265,7 @@ void LCD_Init(bool mode)
 //     * calling this function, otherwise the uint8_tacter will be displayed in the
 //     * current cursor position */
 //    if(cgram_loc > 8){ return; }
-//    
+//
 //    i2c_start();
 //    i2c_sendByte(LCD_I2C_ADDR);
 //    i2c_sendByte(LCD_DATA_CMD);
@@ -330,7 +338,7 @@ void LCD_Init(bool mode)
 //            else if(!lcd_init_cmds[mode][i]){ break; }//only 6 cmds are required for LCD_MODE_2, so exit
 //        }
 //        DELAY_milliseconds(10);
-//        
+//
 //        i2c_stop();
 //    }
 //}
@@ -338,14 +346,14 @@ void LCD_Init(bool mode)
 //{
 //    uint8_t msg1[] = {"inagr\xE2n"};  //inagrón
 //
-//    /*First, store custom uint8_ts for VD logo*/    
-//    LCD_StoreCustomChar((uint8_t *)VDcustomChar1,0);    
+//    /*First, store custom uint8_ts for VD logo*/
+//    LCD_StoreCustomChar((uint8_t *)VDcustomChar1,0);
 //    LCD_StoreCustomChar((uint8_t *)VDcustomChar2,1);
 //    LCD_StoreCustomChar((uint8_t *)VDcustomChar3,2);
 //    LCD_StoreCustomChar((uint8_t *)VDcustomChar4,3);
 //    LCD_StoreCustomChar((uint8_t *)VDcustomChar5,4);
 //    LCD_StoreCustomChar((uint8_t *)VDcustomChar6,5);
-//    LCD_StoreCustomChar((uint8_t *)VDcustomChar7,6);    
+//    LCD_StoreCustomChar((uint8_t *)VDcustomChar7,6);
 //
 //    /*Second, display first screen and wait*/
 //    LCD_GotoYX(1,5);
@@ -358,7 +366,7 @@ void LCD_Init(bool mode)
 //    LCD_Data(3);
 //    LCD_Data(4);
 //    LCD_Data(5);
-//    LCD_Data(6);  
+//    LCD_Data(6);
 //
 //    LCD_PutStr(1,7,msg1,false);
 //

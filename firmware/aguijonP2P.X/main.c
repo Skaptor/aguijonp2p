@@ -8,8 +8,19 @@ int main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
+    
+    i2c_init();
+    
     IO_LCDBL_SetHigh();
     LCD_Init(LCD_MODE_1);
+    
+    bool success = EEPROM_Write(0x00, 0xF4);
+    
+    LCD_putStr(0,0, (success) ? "EEPROM OK" : "EEPROM BAD :(", false);
+    
+    DELAY_milliseconds(2000);
+    
+    LCD_Clear();
     
     uint8_t buffer[64] = {0};
     uint8_t counter = 0;        
