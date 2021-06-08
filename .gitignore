@@ -1,0 +1,63 @@
+# Created by https://www.gitignore.io/api/mplabx
+# Edit at https://www.gitignore.io/?templates=mplabx
+
+### MPLabX ###
+#Ignore List for Microchips MPLabX IDE
+#Form of netbeans with vendor specific changes
+#Taken from zeha on GIST https://gist.github.com/zeha/5999375
+
+*.d
+*.pre
+*.p1
+*.lst
+*.sym
+*.obj
+*.o
+*.sdb
+*.obj.dmp
+html/
+firmware/aguijonP2P.X/nbproject/private/
+firmware/aguijonP2P.X/nbproject/private/*.xml
+firmware/aguijonP2P.X/nbproject/private/private.xml
+firmware/aguijonP2P.X/nbproject/private/configurations.xml
+firmware/aguijonP2P.X/nbproject/Package-*.bash
+firmware/aguijonP2P.X/build/
+firmware/aguijonP2P.X/debug/
+firmware/aguijonP2P.X/.generated_files/
+firmware/aguijonP2P.X/nbbuild/
+firmware/aguijonP2P.X/dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+funclist
+nbproject/Makefile-*
+disassembly/
+*.map
+/firmware/aguijonP2P.X/.generated_files/
+
+*.log
+*.o
+*.elf
+*.map
+*.d
+**/nbproject/private
+**/nbproject/Makefile-*
+**/nbproject/Package-*
+/firmware/aguijonP2P.X/nbproject/private
+/firmware/aguijonP2P.X/nbproject/Makefile-*
+/firmware/aguijonP2P.X/nbproject/Package-*
+**/*.X/.generated_files
+**/*.X/debug
+**/*.X/dist
+**/*.X/build
+**/*.IAR/Debug
+**/*.IAR/settings
+**/*.IAR/*.dep
+**/*.IAR/*.custom_argvars
+/firmware/aguijonP2P.X/build/
+/firmware/aguijonP2P.X/dist/
+
+# End of https://www.gitignore.io/api/mplabx
+firmware/aguijonP2P.X/nbproject/private/private.xml
+firmware/aguijonP2P.X/nbproject/private/configurations.xml
+firmware/aguijonP2P.X/nbproject/Makefile-genesis.properties
