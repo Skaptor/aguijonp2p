@@ -9,6 +9,7 @@
 #include "miwi/miwi_api.h"
 #include "demo_output.h"
 #include "miwi/miwi_nvm.h"
+#include "oc1.h"
 
 #define LIGHT   0x01
 #define SWITCH  0x02
@@ -170,7 +171,14 @@ int main(void)
     IO_LCDBL_SetHigh();
     LCD_Init(LCD_MODE_1);       
     
+//    OC1_Stop();
+//    OC1_PrimaryValueSet(0x1F40);
+//    OC1_SecondaryValueSet(0x3E80);
+//    OC1_Start();
+    
     EscorpionRojo_StartConnection();
+    
+    
     
     LCD_Clear();
     
