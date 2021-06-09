@@ -43,6 +43,7 @@ void LCD_putStr(int y, int x, uint8_t *msg, bool clear)
 {
     if(clear){
         LCD_Clear();
+        DELAY_milliseconds(1);
     }
 
     LCD_GotoYX(y,x);
@@ -90,12 +91,9 @@ void LCD_Init(bool mode)
         i2c_sendByte(0x5E);
         i2c_sendByte(0x6D);
     }
-
-    i2c_stop();
     
     DELAY_milliseconds(60);
-    
-     LCD_Clear();
+    i2c_stop();
 }
 
 

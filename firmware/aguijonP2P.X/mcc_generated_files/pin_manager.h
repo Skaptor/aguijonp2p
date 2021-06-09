@@ -16,7 +16,7 @@
     This source file provides implementations for PIN MANAGER.
     Generation Information :
         Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.170.0
-        Device            :  PIC24FJ256GB108
+        Device            :  PIC24FJ128GB108
     The generated drivers are tested against the following:
         Compiler          :  XC16 v1.61
         MPLAB 	          :  MPLAB X v5.45
@@ -6046,7 +6046,7 @@
 */
 /**
   @Summary
-    Configures the pin settings of the PIC24FJ256GB108
+    Configures the pin settings of the PIC24FJ128GB108
     The peripheral pin select, PPS, configuration is also handled by this manager.
 
   @Description

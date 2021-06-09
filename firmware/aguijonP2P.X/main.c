@@ -141,8 +141,22 @@ void EscorpionRojo_StartConnection(void)
         /*******************************************************************/
         MiApp_StartConnection(START_CONN_ENERGY_SCN,9, 0xFFFFFFFF);
     }
+    
+    /*A:0x11665544332211ff  
+     *PANID:0x1234 Ch:26
+     */
+    
+    uint8_t buffer1[24];
+    uint8_t buffer2[24];
+    
+    
+    DumpConnectionShort(0xFF, buffer1, buffer2);
+    LCD_putStr(0, 0, buffer1, true);
+    LCD_putStr(1, 0, buffer2, false);
 
     DumpConnection(0xFF);
+    
+    DELAY_milliseconds(2000);
 }
 
 int main(void)
@@ -158,12 +172,21 @@ int main(void)
     
     EscorpionRojo_StartConnection();
     
+    LCD_Clear();
+    
     uint8_t buffer[64] = {0};
     
     for(;;){
         sprintf(buffer, "adc=%.4i", adc_read(AN3_POT));
         
-        LCD_putStr(0,0, buffer, false);
+        LCD_putStr(0,0, buffer, true);
+        
+        if(MiApp_MessageAvailable()){
+            uint16_t remoteADC = (rxMessage.Payload[0] << 8) | rxMessage.Payload[1];
+            sprintf(buffer, "remote adc=%.4i", remoteADC);
+            LCD_putStr(1,0, buffer, false);
+            MiApp_DiscardMessage();
+        }
         
         MiApp_FlushTx();
         MiApp_WriteData(adc_read(AN3_POT)>>8);
@@ -172,7 +195,7 @@ int main(void)
             LCD_putStr(1,0, "FAIL :(", false);
         }
         
-        DELAY_milliseconds(500);
+        DELAY_milliseconds(50);
         LATE ^= 0xFF;
         // Add your application code
     }

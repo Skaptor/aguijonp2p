@@ -14,7 +14,7 @@
     This file will be removed in future MCC releases. Use system.h instead.
     Generation Information :
         Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.170.0
-        Device            :  PIC24FJ256GB108
+        Device            :  PIC24FJ128GB108
     The generated drivers are tested against the following:
         Compiler          :  XC16 v1.61
         MPLAB             :  MPLAB X v5.45
@@ -51,13 +51,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "adc1.h"
 #include "spi1.h"
-#include "delay.h"
 #include "interrupt_manager.h"
 #include "traps.h"
-#include "ext_int.h"
 #include "uart1.h"
-#include "adc1.h"
+#include "delay.h"
+#include "ext_int.h"
 
 #warning "This file will be removed in future MCC releases. Use system.h instead."
 

@@ -14,7 +14,7 @@
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
         Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.170.0
-        Device            :  PIC24FJ256GB108
+        Device            :  PIC24FJ128GB108
     The generated drivers are tested against the following:
         Compiler          :  XC16 v1.61
         MPLAB             :  MPLAB X v5.45
@@ -45,7 +45,7 @@
 // Configuration bits: selected in the GUI
 
 // CONFIG3
-#pragma config WPFP = WPFP511    //Write Protection Flash Page Segment Boundary->Highest Page (same as page 170)
+#pragma config WPFP = WPFP511    //Write Protection Flash Page Segment Boundary->Highest Page (same as page 85)
 #pragma config WPDIS = WPDIS    //Segment Write Protection Disable bit->Segmented code protection disabled
 #pragma config WPCFG = WPCFGDIS    //Configuration Word Code Page Protection Select bit->Last page(at the top of program memory) and Flash configuration words are not protected
 #pragma config WPEND = WPENDMEM    //Segment Write Protection End Page Select bit->Write Protect from WPFP to the last page of memory
@@ -75,19 +75,19 @@
 #include "pin_manager.h"
 #include "clock.h"
 #include "system.h"
+#include "adc1.h"
 #include "spi1.h"
-#include "delay.h"
 #include "interrupt_manager.h"
 #include "traps.h"
-#include "ext_int.h"
 #include "uart1.h"
-#include "adc1.h"
+#include "delay.h"
+#include "ext_int.h"
 
 void SYSTEM_Initialize(void)
 {
     PIN_MANAGER_Initialize();
-    INTERRUPT_Initialize();
     CLOCK_Initialize();
+    INTERRUPT_Initialize();
     ADC1_Initialize();
     SPI1_Initialize();
     UART1_Initialize();
