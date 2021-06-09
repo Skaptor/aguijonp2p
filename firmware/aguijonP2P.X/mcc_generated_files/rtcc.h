@@ -237,6 +237,7 @@ void RTCC_TimeReset(bool reset);
 */
 void RTCC_CallBack(void);
 
+bool RTCC_Task(void);
 
 #ifdef __cplusplus  // Provide C++ Compatibility
 

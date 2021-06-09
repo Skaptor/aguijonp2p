@@ -72,12 +72,12 @@ void RTCC_Initialize(void)
    
    if(!RTCCTimeInitialized())
    {
-       // set RTCC time 2021-06-09 10-17-07
+       // set RTCC time 2021-06-09 11-27-20
        RCFGCALbits.RTCPTR = 3;        // start the sequence
        RTCVAL = 0x21;    // YEAR
        RTCVAL = 0x609;    // MONTH-1/DAY-1
-       RTCVAL = 0x310;    // WEEKDAY/HOURS
-       RTCVAL = 0x1707;    // MINUTES/SECONDS
+       RTCVAL = 0x311;    // WEEKDAY/HOURS
+       RTCVAL = 0x2720;    // MINUTES/SECONDS
    }
 
 
@@ -88,8 +88,6 @@ void RTCC_Initialize(void)
    RCFGCALbits.RTCEN = 1;
    RCFGCALbits.RTCWREN = 0;
 
-   //Enable RTCC interrupt
-   IEC3bits.RTCIE = 1;
 }
 
 
@@ -147,8 +145,6 @@ void RTCC_TimeSet(struct tm *initialTime)
 
    RCFGCALbits.RTCEN = 0;
    
-   IFS3bits.RTCIF = false;
-   IEC3bits.RTCIE = 0;
 
    // set RTCC initial time
    RCFGCALbits.RTCPTR = 3;                               // start the sequence
@@ -161,7 +157,6 @@ void RTCC_TimeSet(struct tm *initialTime)
    RCFGCALbits.RTCEN = 1;  
    RCFGCALbits.RTCWREN = 0;
    
-   IEC3bits.RTCIE = 1;
 
 }
 
@@ -200,8 +195,6 @@ void RTCC_BCDTimeSet(bcdTime_t *initialTime)
 
    RCFGCALbits.RTCEN = 0;
 
-   IFS3bits.RTCIF = false;
-   IEC3bits.RTCIE = 0;
 
    // set RTCC initial time
    RCFGCALbits.RTCPTR = 3;                               // start the sequence
@@ -214,7 +207,6 @@ void RTCC_BCDTimeSet(bcdTime_t *initialTime)
    RCFGCALbits.RTCEN = 1;
    RCFGCALbits.RTCWREN = 0;
 
-   IEC3bits.RTCIE = 1;
 }
 
 static uint8_t ConvertHexToBCD(uint8_t hexvalue)
@@ -238,22 +230,26 @@ void __attribute__ ((weak)) RTCC_CallBack(void)
 }
 
 /* Function:
-  void __attribute__ ( ( interrupt, no_auto_psv ) ) _ISR _RTCCInterrupt( void )
+    bool RTCC_Task(void)
 
   Summary:
-    Interrupt Service Routine for the RTCC Peripheral
+    Status function which returns the RTCC interrupt flag status
 
   Description:
-    This is the interrupt service routine for the RTCC peripheral. Add in code if 
-    required in the ISR. 
+    This is the status function for the RTCC peripheral. 
 */
-void __attribute__ ( ( interrupt, no_auto_psv ) ) _ISR _RTCCInterrupt( void )
-{
-	// RTCC callback function 
-	RTCC_CallBack();
-	
-    /* TODO : Add interrupt handling code */
-    IFS3bits.RTCIF = false;
+bool RTCC_Task(void)
+{	
+    bool status;
+    status = IFS3bits.RTCIF;
+    if( IFS3bits.RTCIF)
+    {
+		// RTCC callback function 
+		RTCC_CallBack();
+		
+		IFS3bits.RTCIF = false;
+    }
+    return status;
 }
 
 

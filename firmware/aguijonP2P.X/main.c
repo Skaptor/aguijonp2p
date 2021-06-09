@@ -10,6 +10,8 @@
 #include "demo_output.h"
 #include "miwi/miwi_nvm.h"
 #include "oc1.h"
+#include "rtcc.h"
+#include <time.h>
 
 #define LIGHT   0x01
 #define SWITCH  0x02
@@ -171,14 +173,16 @@ int main(void)
     IO_LCDBL_SetHigh();
     LCD_Init(LCD_MODE_1);       
     
-//    OC1_Stop();
-//    OC1_PrimaryValueSet(0x1F40);
-//    OC1_SecondaryValueSet(0x3E80);
-//    OC1_Start();
+    OC1_Stop();
+    OC1_PrimaryValueSet(0x1F40);
+    OC1_SecondaryValueSet(0x3E80);
+    OC1_Start();
     
     EscorpionRojo_StartConnection();
     
+    OC1_Stop();
     
+    struct tm currentTime;
     
     LCD_Clear();
     
@@ -203,8 +207,14 @@ int main(void)
             LCD_putStr(1,0, "FAIL :(", false);
         }
         
+        while(!RTCC_TimeGet(&currentTime));
+        
+        printf("time is: %i\r", currentTime.tm_sec);
+        
         DELAY_milliseconds(50);
         LATE ^= 0xFF;
+        
+        
         // Add your application code
     }
 

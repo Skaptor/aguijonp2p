@@ -78,6 +78,7 @@
 #include "spi1.h"
 #include "ext_int.h"
 #include "delay.h"
+#include "rtcc.h"
 #include "interrupt_manager.h"
 #include "traps.h"
 #include "uart1.h"
@@ -94,6 +95,7 @@ void SYSTEM_Initialize(void)
     UART1_Initialize();
     OC1_Initialize();
     EXT_INT_Initialize();
+    RTCC_Initialize();
 }
 
 /**
