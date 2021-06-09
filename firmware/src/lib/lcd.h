@@ -50,6 +50,16 @@
 #define BLIGHT_LVL_2    6000    //..  25%
 #define BLIGHT_LVL_1    7600    //lowest intensity   5%
 
+#define SCROLLER_SIZE 64
+
+typedef struct
+{
+    int8_t currPos;
+    uint8_t textSize;
+    uint8_t text[SCROLLER_SIZE];    
+    uint8_t delay; 
+}Scroller_t;
+
 
 void LCD_GotoYX(int y, int x);
 void LCD_putStr(int y, int x, uint8_t *msg, bool clear);

@@ -1,3 +1,4 @@
+#include <string.h>
 #include "system.h"
 #include "lcd.h"
 #include "pin_manager.h"
@@ -59,6 +60,57 @@ void LCD_putStr(int y, int x, uint8_t *msg, bool clear)
     i2c_stop();
 }
 
+#define LCD_SIZE 20
+void LCD_scrollInit(uint8_t delaya, uint8_t *pText, Scroller_t *pScroller)
+{
+    uint8_t textSize = 0;
+    
+    textSize = strlen(pText);
+    
+    if(textSize > SCROLLER_SIZE){
+        textSize = SCROLLER_SIZE;
+    }
+    
+    pScroller->currPos  = LCD_SIZE-1;
+    pScroller->textSize = textSize;
+    pScroller->delay = delaya;
+    memcpy(pScroller->text, pText, textSize);
+    
+}
+
+
+bool LCD_scroll(uint8_t y, Scroller_t *pScroller, bool loop)
+{
+    #define SPACE 0x20
+    uint8_t textBuffer[LCD_SIZE];
+    uint8_t toCopy = 0;
+    
+    memset(textBuffer, SPACE, sizeof(textBuffer));  
+        
+    if(pScroller->currPos < 0){
+        toCopy = (-1*pScroller->currPos);
+        memcpy(&textBuffer[0], &pScroller->text[toCopy], pScroller->textSize-toCopy);
+    }else{
+        toCopy = ((LCD_SIZE-pScroller->currPos) > pScroller->textSize) ? pScroller->textSize : (LCD_SIZE-pScroller->currPos)+1;
+        memcpy(&textBuffer[pScroller->currPos], &pScroller->text[0], toCopy);
+    }    
+        
+    LCD_putStr(y, 0, textBuffer, false);   
+    
+    if(pScroller->currPos > (-pScroller->textSize)){
+        pScroller->currPos--;   
+        
+        if(pScroller->currPos == -1 && loop){
+            return true;
+        }
+    }else{
+        pScroller->currPos = LCD_SIZE-1; 
+    }
+    
+    DELAY_milliseconds(pScroller->delay);
+    
+    return false;
+}
 
 void LCD_Init(bool mode)
 {

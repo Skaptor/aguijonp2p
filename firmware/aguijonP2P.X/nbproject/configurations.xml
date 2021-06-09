@@ -119,9 +119,10 @@
       </logicalFolder>
       <itemPath>../src/demo_ouput.c</itemPath>
       <itemPath>../src/p2p_demo.c</itemPath>
-      <itemPath>../src/task.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>../src/mainmiwi.c</itemPath>
+      <itemPath>timerApp.c</itemPath>
+      <itemPath>timerControlApp.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

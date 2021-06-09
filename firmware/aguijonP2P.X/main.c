@@ -7,8 +7,8 @@
 #include "adc1.h"
 #include "bsp.h"
 #include "miwi/miwi_api.h"
-#include "demo_output.h"
 #include "miwi/miwi_nvm.h"
+#include "demo_output.h"
 #include "oc1.h"
 #include "rtcc.h"
 #include <time.h>
@@ -171,48 +171,52 @@ int main(void)
     i2c_init();
     
     IO_LCDBL_SetHigh();
-    LCD_Init(LCD_MODE_1);       
+    LCD_Init(LCD_MODE_1);           
+    EscorpionRojo_StartConnection();    
     
-    OC1_Stop();
-    OC1_PrimaryValueSet(0x1F40);
-    OC1_SecondaryValueSet(0x3E80);
-    OC1_Start();
+    Scroller_t scroller;
+    Scroller_t scroller2;
     
-    EscorpionRojo_StartConnection();
-    
-    OC1_Stop();
-    
-    struct tm currentTime;
-    
-    LCD_Clear();
-    
-    uint8_t buffer[64] = {0};
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    LCD_scrollInit(0, "skaptor:V", &scroller);    
+    LCD_scrollInit(100, "12345678901234567890123456789012345678901234567890", &scroller2);    
+    while(true){
+//        LCD_scroll(0, &scroller, false);
+        LCD_scroll(1, &scroller2, false);
+    }
+
+    //    struct tm currentTime;
     
     for(;;){
-        sprintf(buffer, "adc=%.4i", adc_read(AN3_POT));
+        ta_tasks();
+//        tca_tasks();
         
-        LCD_putStr(0,0, buffer, true);
-        
-        if(MiApp_MessageAvailable()){
-            uint16_t remoteADC = (rxMessage.Payload[0] << 8) | rxMessage.Payload[1];
-            sprintf(buffer, "remote adc=%.4i", remoteADC);
-            LCD_putStr(1,0, buffer, false);
-            MiApp_DiscardMessage();
-        }
-        
-        MiApp_FlushTx();
-        MiApp_WriteData(adc_read(AN3_POT)>>8);
-        MiApp_WriteData(adc_read(AN3_POT));
-        if(MiApp_BroadcastPacket(false) == false){
-            LCD_putStr(1,0, "FAIL :(", false);
-        }
-        
-        while(!RTCC_TimeGet(&currentTime));
-        
-        printf("time is: %i\r", currentTime.tm_sec);
-        
-        DELAY_milliseconds(50);
-        LATE ^= 0xFF;
+//        sprintf(buffer, "adc=%.4i", adc_read(AN3_POT));
+//        
+//        LCD_putStr(0,0, buffer, true);
+//        
+//        if(MiApp_MessageAvailable()){
+//            uint16_t remoteADC = (rxMessage.Payload[0] << 8) | rxMessage.Payload[1];
+//            sprintf(buffer, "remote adc=%.4i", remoteADC);
+//            LCD_putStr(1,0, buffer, false);
+//            MiApp_DiscardMessage();
+//        }
+//        
+//        MiApp_FlushTx();
+//        MiApp_WriteData(adc_read(AN3_POT)>>8);
+//        MiApp_WriteData(adc_read(AN3_POT));
+//        if(MiApp_BroadcastPacket(false) == false){
+//            LCD_putStr(1,0, "FAIL :(", false);
+//        }
+//        
+//        while(!RTCC_TimeGet(&currentTime));
+//        
+//        printf("time is: %i\r", currentTime.tm_sec);
+//        
+//        DELAY_milliseconds(50);
+//        LATE ^= 0xFF;
         
         
         // Add your application code
