@@ -66,7 +66,7 @@ void PIN_MANAGER_Initialize (void)
     LATC = 0x0000;
     LATD = 0x0100;
     LATE = 0x0000;
-    LATF = 0x0000;
+    LATF = 0x0003;
     LATG = 0x0000;
 
     /****************************************************************************
@@ -116,13 +116,13 @@ void PIN_MANAGER_Initialize (void)
      ***************************************************************************/
     __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
 
-    RPOR5bits.RP10R = 0x0008;    //RF4->SPI1:SCK1OUT
     RPOR4bits.RP9R = 0x0003;    //RB9->UART1:U1TX
-    RPINR0bits.INT1R = 0x0005;    //RD15->EXT_INT:INT1
-    RPINR18bits.U1RXR = 0x0008;    //RB8->UART1:U1RX
     RPOR15bits.RP30R = 0x0007;    //RF2->SPI1:SDO1
-    RPINR20bits.SDI1R = 0x0011;    //RF5->SPI1:SDI1
     RPOR13bits.RP26R = 0x0012;    //RG7->OC1:OC1
+    RPINR20bits.SDI1R = 0x0011;    //RF5->SPI1:SDI1
+    RPINR18bits.U1RXR = 0x0008;    //RB8->UART1:U1RX
+    RPOR5bits.RP10R = 0x0008;    //RF4->SPI1:SCK1OUT
+    RPINR0bits.INT1R = 0x0005;    //RD15->EXT_INT:INT1
 
     __builtin_write_OSCCONL(OSCCON | 0x40); // lock PPS
 }

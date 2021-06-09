@@ -15,6 +15,11 @@ typedef enum
 
 static TCastate_t state = WAIT_KEY;
 
+//temp
+
+//end temp
+
+
 void tca_tasks(void)
 {
     static MIWI_TICK tick;
@@ -24,19 +29,24 @@ void tca_tasks(void)
             tick = MiWi_TickGet();
             state = WAIT_KEY;
             
-        case WAIT_KEY:
-//            if(MiWi_TickGetDiff(MiWi_TickGet(), tick) > ONE_SECOND){
-//                tick = MiWi_TickGet();
-//                state = SEND;
-//            }
-            
-            DELAY_milliseconds(1000);
-            state = SEND;
+        case WAIT_KEY:           
+            if(IO_DIPSW0_GetValue() == 0){
+                DELAY_milliseconds(10);
+                if(IO_DIPSW0_GetValue() != 0){
+                    break;
+                }
+
+                LCD_putStr(0, 0, "sent                   ", false);
+                state = SEND;
+            }
             break;
             
         case SEND:
             MiApp_FlushTx();
-            MiApp_WriteData(0);
+            MiApp_WriteData(0x00);
+            MiApp_WriteData(0x00); //minutes
+            MiApp_WriteData(0x0A); //seconds
+            MiApp_WriteData(true);
             if(MiApp_BroadcastPacket(false) == false){
                 LCD_putStr(1,0, "FAIL :(", false);
             }
@@ -48,7 +58,7 @@ void tca_tasks(void)
                 break;                
             }       
             
-            LCD_putStr(0,0, "Rcvd response", true);
+            LCD_putStr(1,0, "Rcvd response", false);
             
             state = INIT;
             break;
