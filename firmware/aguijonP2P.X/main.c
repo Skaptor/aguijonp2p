@@ -11,6 +11,7 @@
 #include "demo_output.h"
 #include "oc1.h"
 #include "rtcc.h"
+#include "tmr1.h"
 #include <time.h>
 
 #define LIGHT   0x01
@@ -162,6 +163,18 @@ void EscorpionRojo_StartConnection(void)
     DELAY_milliseconds(2000);
 }
 
+static uint32_t tick = 0;
+
+uint32_t tickGet(void)
+{
+    return tick;
+}
+
+void appTimerInterrupt(void)
+{  
+    tick++;
+}
+
 int main(void)
 {
     // initialize the device
@@ -170,24 +183,13 @@ int main(void)
     
     i2c_init();
     
+    TMR1_SetInterruptHandler(appTimerInterrupt);
+    
     IO_LCDBL_SetHigh();
     LCD_Init(LCD_MODE_1);           
     EscorpionRojo_StartConnection();    
     
-    Scroller_t scroller;
-    Scroller_t scroller2;
-    
-    asm("nop");
-    asm("nop");
-    asm("nop");
-    LCD_scrollInit(0, "skaptor:V", &scroller);    
-    LCD_scrollInit(100, "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ12345678901234", &scroller2);    
-    while(true){
-//        LCD_scroll(0, &scroller, false);
-        LCD_scroll(1, &scroller2, false);
-    }
-
-    //    struct tm currentTime;
+    ta_initialize();
     
     for(;;){
         ta_tasks();

@@ -101,7 +101,7 @@ bool LCD_scroll(uint8_t y, Scroller_t *pScroller, bool loop)
     
     pScroller->currPos = (pScroller->currPos > (-pScroller->textSize)) ? pScroller->currPos-1 : (LCD_SIZE-1);
     
-    return (pScroller->currPos == -1 && loop);
+    return (loop) ? (pScroller->currPos == (LCD_SIZE-1)) : (pScroller->currPos < 0); 
 }
 
 void LCD_Init(bool mode)
