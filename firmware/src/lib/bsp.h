@@ -153,15 +153,15 @@
     #define USB_5V_FAULT_TRIS       TRISGbits.TRISG8
 
     //SPI
-    #define PHY_CS                  LATFbits.LATF5
-    #define PHY_CS_TRIS             TRISFbits.TRISF5
+    #define AGUIJON_PHY_CS                  LATFbits.LATF5
+    #define AGUIJON_PHY_CS_TRIS             TRISFbits.TRISF5
 
-    #define SPI_SDO                 PORTBbits.RB5
-    #define SDO_TRIS                TRISBbits.TRISB5
-    #define SPI_SDI                 LATBbits.LATB14
-    #define SDI_TRIS                TRISBbits.TRISB14
-    #define SPI_SCK                 LATBbits.LATB4
-    #define SCK_TRIS                TRISBbits.TRISB4
+    #define AGUIJON_SPI_SDO                 PORTBbits.RB5
+    #define AGUIJON_SDO_TRIS                TRISBbits.TRISB5
+    #define AGUIJON_SPI_SDI                 LATBbits.LATB14
+    #define AGUIJON_SDI_TRIS                TRISBbits.TRISB14
+    #define AGUIJON_SPI_SCK                 LATBbits.LATB4
+    #define AGUIJON_SCK_TRIS                TRISBbits.TRISB4
 
 
 
@@ -420,10 +420,10 @@
         #define EXP_PORT2_PIN11_RPOUT   RPOR13bits.RP27R
         #define EXP_PORT2_PIN11_RPIN    (18)
 
-        #define EXP_PORT2_PIN12_LAT     LATGbits.LATG9
-        #define EXP_PORT2_PIN12_PORT    PORTGbits.RG9
-        #define EXP_PORT2_PIN12_TRIS    LATGbits.LATG9
-        #define EXP_PORT2_PIN12_RPOUT   RPOR13bits.RP27R
+        #define EXP_PORT2_PIN12_LAT     LATDbits.LATD15
+        #define EXP_PORT2_PIN12_PORT    PORTDbits.RD15
+        #define EXP_PORT2_PIN12_TRIS    LATDbits.LATD15
+        #define EXP_PORT2_PIN12_RPOUT   RPOR7bits.RP15R
         #define EXP_PORT2_PIN12_RPIN    (27)
 
         #define EXP_PORT2_PIN13_LAT     LATGbits.LATG8

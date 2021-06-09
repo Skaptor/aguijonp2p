@@ -9,8 +9,6 @@ static const uint8_t lcd_init_cmds[2][9] = {
     {0x34, 0x34, 0x14, 0x70, 0x5E, 0x6D, 0x00, 0x00, 0x00}, //used when LCD_MODE_2
 };
 
-static uint8_t buffer[64];
-
 static void sendCommand(uint8_t cmd)
 {
     //for more info on commands, refer to st7036i controller
@@ -21,14 +19,14 @@ static void sendCommand(uint8_t cmd)
     i2c_stop();
 }
 
-static void sendData(uint8_t data)
-{
-    i2c_start();
-    i2c_sendByte(LCD_I2C_ADDR);
-    i2c_sendByte(LCD_DATA_CMD);
-    i2c_sendByte(data);
-    i2c_stop();
-}
+//static void sendData(uint8_t data)
+//{
+//    i2c_start();
+//    i2c_sendByte(LCD_I2C_ADDR);
+//    i2c_sendByte(LCD_DATA_CMD);
+//    i2c_sendByte(data);
+//    i2c_stop();
+//}
 
 void LCD_GotoYX(int y, int x)
 {
@@ -93,8 +91,11 @@ void LCD_Init(bool mode)
         i2c_sendByte(0x6D);
     }
 
-    DELAY_milliseconds(60);
     i2c_stop();
+    
+    DELAY_milliseconds(60);
+    
+     LCD_Clear();
 }
 
 

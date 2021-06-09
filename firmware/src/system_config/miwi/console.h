@@ -188,6 +188,6 @@ void CONSOLE_PrintDec(uint8_t);
 
 #endif
 
-#define Printf(x) CONSOLE_PutString((char*)x)
+#define Printf(x) printf((char*)x)
 
 #endif

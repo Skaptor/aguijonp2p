@@ -20,6 +20,7 @@
  CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
  *******************************************************************/
 
+#include <stdio.h>
 #include "system.h"
 #include "system_config.h"
 #include "delay.h"
@@ -62,127 +63,17 @@ MIWI_TICK PUSH_BUTTON_press_time;
 
 void DemoOutput_Greeting(void)
 {
-    #if defined(MRF49XA)
-        #if defined(PROTOCOL_P2P)
-            printf((char *)"Simple P2P Demo  MRF49XA Node", 0, true);
-        #endif
-        #if defined(PROTOCOL_STAR)
-            printf((char *)"Simple STAR     MRF49XA Node", 0, true);
-        #endif
-        #if defined(PROTOCOL_MIWI)
-            printf((char *)"Simple MiWi Demo MRF49XA Node ", 0, true);
-        #endif
-        #if defined(PROTOCOL_MIWI_PRO)
-            printf((char *)"Simple MiWi PRO  MRF49XA Node ", 0, true);
-        #endif
-    #elif defined(MRF24J40)
-        #if defined(PROTOCOL_P2P)
-            printf((char *)"Simple P2P Demo MRF24J40 Node ", 0);
-        #endif
-        #if defined(PROTOCOL_STAR)
-            printf((char *)"Simple STAR     MRF24J40 Node", 0, true);
-        #endif
-        #if defined(PROTOCOL_MIWI)
-            printf((char *)"Simple MiWi DemoMRF24J40 Node ", 0, true);
-        #endif
-        #if defined(PROTOCOL_MIWI_PRO)
-            printf((char *)"Simple MiWi PRO MRF24J40 Node ", 0, true);
-        #endif
-    #elif defined(MRF24XA)
-        #if defined(PROTOCOL_P2P)
-            printf((char *)"Simple P2P Demo MRF24XA Node ", 0, true);
-        #endif
-        #if defined(PROTOCOL_STAR)
-            printf((char *)"Simple STAR     MRF24XA Node", 0, true);
-        #endif
-        #if defined(PROTOCOL_MIWI)
-            printf((char *)"Simple MiWi DemoMRF24XA Node ", 0, true);
-        #endif
-        #if defined(PROTOCOL_MIWI_PRO)
-            printf((char *)"Simple MiWi PRO MRF24XA Node ", 0, true);
-        #endif
-    #elif defined(MRF89XA)
-        #if defined(PROTOCOL_P2P)
-            printf((char *)"Simple P2P Demo  MRF89XA Node ", 0, true);
-        #endif
-        #if defined(PROTOCOL_STAR)
-            printf((char *)"Simple STAR     MRF89XA Node", 0, true);
-        #endif
-        #if defined(PROTOCOL_MIWI)
-            printf((char *)"Simple MiWi Demo MRF89XA Node ", 0, true);
-        #endif
-        #if defined(PROTOCOL_MIWI_PRO)
-            printf((char *)"Simple MiWi PRO  MRF89XA Node 1", 0, true);
-        #endif
-    #endif
-    #if defined (ENABLE_CONSOLE)
-        #if defined(PROTOCOL_P2P)
-            Printf("\r\nStarting Node 1 of Simple Demo for MiWi(TM) P2P Stack ...");  
-        #endif
-        #if defined(PROTOCOL_STAR)
-            Printf("\r\nStarting Node 1 of Simple Demo for MiWi(TM) STAR Stack ...");  
-        #endif
-        #if defined(PROTOCOL_MIWI)
-            Printf("\r\nStarting Node 1 of Simple Demo for MiWi(TM) Stack ...");  
-        #endif 
-        #if defined(PROTOCOL_MIWI_PRO)
-            Printf("\r\nStarting Node 1 of Simple Demo for MiWi(TM) PRO Stack ...");  
-        #endif 
-    #endif
-    #if defined(PICDEMZ) 
-        Printf("\r\nInput Configuration:");
-        Printf("\r\n           Button 1: RB5");
-        Printf("\r\n           Button 2: RB4");
-        Printf("\r\nOutput Configuration:");
-        Printf("\r\n                     RS232 port");
-        Printf("\r\n              LED 1: RA0");
-        Printf("\r\n              LED 2: RA1");
-    #endif
-    #if defined(PIC18_EXPLORER) 
-        Printf("\r\nInput Configuration:");
-        Printf("\r\n           Button 1: RB0");
-        Printf("\r\n           Button 2: RA5");
-        Printf("\r\nOutput Configuration:");
-        Printf("\r\n                     RS232 port");
-        Printf("\r\n                     USB port");
-        Printf("\r\n              LED 1: D8");
-        Printf("\r\n              LED 2: D7");
-    #endif
-    #if defined(EIGHT_BIT_WIRELESS_BOARD) 
-        Printf("\r\nInput Configuration:");
-        Printf("\r\n           Button 1: RB0");
-        Printf("\r\n           Button 2: RB2");
-        Printf("\r\nOutput Configuration:");
-        Printf("\r\n              LED 1: RA2");
-        Printf("\r\n              LED 2: RA3");
-    #endif
-    #if defined(EXPLORER16) 
-        Printf("\r\nInput Configuration:");
-        Printf("\r\n           Button 1: RD6");
-        Printf("\r\n           Button 2: RD7");
-        Printf("\r\nOutput Configuration:");
-        Printf("\r\n                     RS232 port");
-        Printf("\r\n              LED 1: D10");
-        Printf("\r\n              LED 2: D9");
-    #endif
-    #if defined(ENABLE_CONSOLE)   
-        #if defined(MRF24J40)
-        Printf("\r\n     RF Transceiver: MRF24J40");
-        #elif defined(MRF24XA)
-        Printf("\r\n     RF Transceiver: MRF24XA");
-        #elif defined(MRF49XA)
-        Printf("\r\n     RF Transceiver: MRF49XA");
-        #elif defined(MRF89XA)
-        Printf("\r\n     RF Transceiver: MRF89XA");
-        #endif
-        Printf("\r\n   Demo Instruction:");
-        Printf("\r\n                     Power on the board until LED 1 lights up");
-        Printf("\r\n                     to indicate connecting with peer. Push");
-        Printf("\r\n                     Button 1 to broadcast message. Push Button");
-        Printf("\r\n                     2 to unicast encrypted message. LED 2 will");
-        Printf("\r\n                     be toggled upon receiving messages. ");
-        Printf("\r\n\r\n");    
-    #endif 
+    printf((char *)"Simple P2P Demo MRF24J40 Node ");
+    printf("\r\nStarting Node 1 of Simple Demo for MiWi(TM) P2P Stack ...");  
+
+    printf("\r\n     RF Transceiver: MRF24J40");        
+    printf("\r\n   Demo Instruction:");
+    printf("\r\n                     Power on the board until LED 1 lights up");
+    printf("\r\n                     to indicate connecting with peer. Push");
+    printf("\r\n                     Button 1 to broadcast message. Push Button");
+    printf("\r\n                     2 to unicast encrypted message. LED 2 will");
+    printf("\r\n                     be toggled upon receiving messages. ");
+    printf("\r\n\r\n");    
 }        
 
 void demo_output_freezer_options(void)
@@ -204,9 +95,9 @@ void DemoOutput_Channel(uint8_t channel, uint8_t Step)
         
         printf((char *)"Connecting Peer  on Channel %d ", channel);
         #if !defined(MIWIKIT)
-        Printf("\r\nConnecting Peer on Channel ");
+        printf("\r\nConnecting Peer on Channel ");
         CONSOLE_PrintDec(channel);
-        Printf("\r\n");
+        printf("\r\n");
         #endif
     }
     else
@@ -214,24 +105,34 @@ void DemoOutput_Channel(uint8_t channel, uint8_t Step)
       
         printf((char *)"Connected Peer  on Channel %d", channel);
         #if !defined(MIWIKIT)
-        Printf("\r\nConnected Peer on Channel ");
+        printf("\r\nConnected Peer on Channel ");
         CONSOLE_PrintDec(channel);
-        Printf("\r\n");
+        printf("\r\n");
         #endif
     }
 }    
 
+void DemoOutput_StartActiveScan(void)
+{
+    LCD_putStr(0,0,"Active Scanning",true);
+    printf("\r\nStarting Active Scan...");
+}
+
+void DemoOutput_EnergyScan(void)
+{    
+    LCD_putStr(0,0,"Active Scanning",true);
+    LCD_putStr(1,0,"Energy Scanning",false);
+}  
+
+void DemoOutput_JoinFail(void)
+{
+//    Printf("\r\nJoin Fail");
+    LCD_putStr(0,0,"Join Fail",true);
+}    
+
 void DemoOutput_Instruction(void)
 {
-    #if defined(EXPLORER16)
-        printf((char *)"RD6: Broadcast  RD7: Unicast", 0, false);
-    #elif defined(PIC18_EXPLORER)
-        printf((char *)"RB0: Broadcast  RA5: Unicast", 0, false);
-    #elif defined(EIGHT_BIT_WIRELESS_BOARD)
-        printf((char *)"RB0: Broadcast  RB2: Unicast", 0, false);
-    #elif defined(MIWIKIT)
-        printf((char *)"SW1: Broadcast  SW2: Unicast", 0, false);
-    #endif
+    
 }    
 
 
@@ -239,23 +140,16 @@ void DemoOutput_HandleMessage(void)
 {
     uint8_t i;
 
-    if( rxMessage.flags.bits.secEn )
-    {
-        CONSOLE_PutString((char *)"Secured ");
+    if(rxMessage.flags.bits.secEn){
+        printf("Secured ");
     }
-
-    if( rxMessage.flags.bits.broadcast )
-    {
-        CONSOLE_PutString((char *)"Broadcast Packet with RSSI ");
-    }
-    else
-    {
-        CONSOLE_PutString((char *)"Unicast Packet with RSSI ");
-    }
+    
+    printf((rxMessage.flags.bits.broadcast) ? "Broadcast Packet with RSSI " : "Unicast Packet with RSSI ");
+    
     CONSOLE_PrintHex(rxMessage.PacketRSSI);
     if( rxMessage.flags.bits.srcPrsnt )
     {
-        CONSOLE_PutString((char *)" from ");
+        printf(" from ");
         if( rxMessage.flags.bits.altSrcAddr )
         {
             CONSOLE_PrintHex( rxMessage.SourceAddress[1]);
@@ -269,10 +163,9 @@ void DemoOutput_HandleMessage(void)
             }    
         }
     }
-    CONSOLE_PutString((char *)": ");
+    printf(": ");
     
-    for(i = 0; i < rxMessage.PayloadSize; i++)
-    {
+    for(i = 0; i < rxMessage.PayloadSize; i++){
         CONSOLE_Put(rxMessage.Payload[i]);
     }       
 }    
@@ -284,61 +177,14 @@ void DemoOutput_UpdateTxRx(uint8_t TxNum, uint8_t RxNum)
 
 void DemoOutput_ChannelError(uint8_t channel)
 {
-    #if defined (ENABLE_CONSOLE)
-        Printf("\r\nSelection of channel ");
-        CONSOLE_PrintDec(channel);
-        Printf(" is not supported in current configuration.\r\n");
-    #endif
+    printf("\r\nSelection of channel %i", channel);
+    printf(" is not supported in current configuration.\r\n");
 }    
 
 void DemoOutput_UnicastFail(void)
 {
-    #if defined (ENABLE_CONSOLE)
-        Printf("\r\nUnicast Failed\r\n");
-    #endif
-    printf((char *)" Unicast Failed");
+    printf("\r\nUnicast Failed\r\n");
 }    
-
-#if defined(PROTOCOL_STAR)
-    void Source_END_DEVICE_INFO(uint8_t *SrAddr)
-    {
-        LCD_Erase();
-        sprintf((char *)&(LCDText), (char*)"Data Packet from");
-        sprintf((char *)&(LCDText[16]), (char*)" Address:%02x%02x%02x",SrAddr[0],SrAddr[1],SrAddr[2]);
-        LCD_Update();
-        DELAY_ms(1200);
-    }
-    
-void STAR_DEMO_OPTIONS_MESSAGE(bool NetworkRole)
-{
-    if (NetworkRole)
-    {
-        #if defined(EXPLORER16)
-            printf((char *)"PC :RD6 or RD7  to Broadcast", 0, false);
-        #elif defined(PIC18_EXPLORER)
-            printf((char *)"PC :RB0 or RA5  to Broadcast", 0, false);
-        #elif defined(EIGHT_BIT_WIRELESS_BOARD)
-            printf((char *)"PC :RB0 or RB2  to Broadcast", 0, false);
-        #elif defined(MIWIKIT)
-            printf((char *)"PC :SW1 or SW2  to Broadcast", 0, false);
-        #endif
-    }
-    else
-    {
-        #if defined(EXPLORER16)
-            printf((char *)"RD6 : Unicast   RD7 : Next Node", 0, false);
-        #elif defined(PIC18_EXPLORER)
-            printf((char *)"RB0 : Unicast   RA5 : Next Node", 0, false);
-        #elif defined(EIGHT_BIT_WIRELESS_BOARD)
-            printf((char *)"RB0 : Unicast   RB2 : Next Node", 0, false);
-        #elif defined(MIWIKIT)
-            printf((char *)"SW1 : Unicast   SW2 : Next Node", 0, false);
-        #endif
-    }
-    
-}
-#endif
-    
 
 /*********************************************************************
  * Function:        uint8_t ButtonPressed(void)

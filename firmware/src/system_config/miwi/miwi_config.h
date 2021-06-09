@@ -137,7 +137,7 @@
 // Network freezer feature needs definition of NVM kind to be 
 // used, which is specified in HardwareProfile.h
 /*********************************************************************/
-#define ENABLE_NETWORK_FREEZER
+//#define ENABLE_NETWORK_FREEZER
 
 #if defined(PROTOCOL_STAR)
     // if defined the END Device will be considered Active forever 
@@ -264,7 +264,7 @@
 // ENABLE_ACTIVE_SCAN will enable the device to do an active scan to 
 // to detect current existing connection. 
 /*********************************************************************/
-//#define ENABLE_ACTIVE_SCAN
+#define ENABLE_ACTIVE_SCAN
 
 
 /*********************************************************************/

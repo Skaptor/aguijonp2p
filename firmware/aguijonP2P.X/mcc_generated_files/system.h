@@ -46,6 +46,7 @@
 #define _XTAL_FREQ  32000000UL
 #endif
 
+#include <stdio.h>
 #include "xc.h"
 #include "stdint.h"
 #include "..\definitions.h"

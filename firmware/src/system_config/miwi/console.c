@@ -162,13 +162,7 @@ uint8_t CONSOLE_Get(void)
 ********************************************************************/
 void CONSOLE_PrintHex(uint8_t toPrint)
 {
-    uint8_t PRINT_VAR;
-    PRINT_VAR = toPrint;
-    toPrint = (toPrint>>4)&0x0F;
-    CONSOLE_Put(CharacterArray[toPrint]);
-    toPrint = (PRINT_VAR)&0x0F;
-    CONSOLE_Put(CharacterArray[toPrint]);
-    return;
+    printf("%x", toPrint);
 }
 
 /*********************************************************************
@@ -192,11 +186,12 @@ void CONSOLE_PrintHex(uint8_t toPrint)
 ********************************************************************/
 void CONSOLE_PrintDec(uint8_t toPrint)
 {
-    if( toPrint >= 100 )
-        CONSOLE_Put(CharacterArray[toPrint/100]);
-    if( toPrint >= 10 )
-        CONSOLE_Put(CharacterArray[(toPrint%100)/10]);
-    CONSOLE_Put(CharacterArray[toPrint%10]);
+    printf("%i", toPrint);
+}
+
+void PrintDec(uint8_t toPrint)
+{
+    printf("%i", toPrint);
 }
 
 
