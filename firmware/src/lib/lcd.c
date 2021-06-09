@@ -89,7 +89,7 @@ bool LCD_scroll(uint8_t y, Scroller_t *pScroller, bool loop)
         
     if(pScroller->currPos < 0){
         toCopy = (-1*pScroller->currPos);
-        memcpy(&textBuffer[0], &pScroller->text[toCopy], pScroller->textSize-toCopy);
+        memcpy(&textBuffer[0], &pScroller->text[toCopy], ((pScroller->textSize-toCopy) > LCD_SIZE) ? LCD_SIZE : pScroller->textSize-toCopy);                   
     }else{
         toCopy = ((LCD_SIZE-pScroller->currPos) > pScroller->textSize) ? pScroller->textSize : (LCD_SIZE-pScroller->currPos)+1;
         memcpy(&textBuffer[pScroller->currPos], &pScroller->text[0], toCopy);
@@ -97,19 +97,11 @@ bool LCD_scroll(uint8_t y, Scroller_t *pScroller, bool loop)
         
     LCD_putStr(y, 0, textBuffer, false);   
     
-    if(pScroller->currPos > (-pScroller->textSize)){
-        pScroller->currPos--;   
-        
-        if(pScroller->currPos == -1 && loop){
-            return true;
-        }
-    }else{
-        pScroller->currPos = LCD_SIZE-1; 
-    }
-    
     DELAY_milliseconds(pScroller->delay);
     
-    return false;
+    pScroller->currPos = (pScroller->currPos > (-pScroller->textSize)) ? pScroller->currPos-1 : (LCD_SIZE-1);
+    
+    return (pScroller->currPos == -1 && loop);
 }
 
 void LCD_Init(bool mode)

@@ -181,7 +181,7 @@ int main(void)
     asm("nop");
     asm("nop");
     LCD_scrollInit(0, "skaptor:V", &scroller);    
-    LCD_scrollInit(100, "12345678901234567890123456789012345678901234567890", &scroller2);    
+    LCD_scrollInit(100, "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ12345678901234", &scroller2);    
     while(true){
 //        LCD_scroll(0, &scroller, false);
         LCD_scroll(1, &scroller2, false);
