@@ -9,4 +9,8 @@
 #define ACK_EEPROM          true
 #define DONT_ACK_EEPROM     false
 
+void EEPROM_Read(uint8_t *pDest, uint8_t address, uint8_t count);
+uint8_t EEPROM_Read2(uint8_t address);
+bool EEPROM_Write(uint8_t address, uint8_t new_data);
+
 #endif

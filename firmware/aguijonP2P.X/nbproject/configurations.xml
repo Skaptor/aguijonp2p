@@ -28,6 +28,8 @@
         <itemPath>../src/lib/24LC01.h</itemPath>
         <itemPath>../src/lib/i2c.h</itemPath>
         <itemPath>../src/lib/adc.h</itemPath>
+        <itemPath>../src/lib/tick.h</itemPath>
+        <itemPath>../src/lib/switches.h</itemPath>
       </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
@@ -54,10 +56,9 @@
           <itemPath>../src/system_config/miwi/miwi_config.h</itemPath>
         </logicalFolder>
       </logicalFolder>
-      <itemPath>../src/demo_output.h</itemPath>
-      <itemPath>../src/p2p_demo.h</itemPath>
       <itemPath>../src/task.h</itemPath>
       <itemPath>definitions.h</itemPath>
+      <itemPath>waterTimer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -70,10 +71,6 @@
         <logicalFolder name="f1" displayName="driver" projectFiles="true">
           <logicalFolder name="f1" displayName="mrf_miwi" projectFiles="true">
             <itemPath>../../../../../../framework/driver/mrf_miwi/src/drv_mrf_miwi_24j40.c</itemPath>
-            <itemPath>../../../../../../framework/driver/mrf_miwi/src/drv_mrf_miwi_24xa.c</itemPath>
-            <itemPath>../../../../../../framework/driver/mrf_miwi/src/drv_mrf_miwi_24xa_proprietary.c</itemPath>
-            <itemPath>../../../../../../framework/driver/mrf_miwi/src/drv_mrf_miwi_49xa.c</itemPath>
-            <itemPath>../../../../../../framework/driver/mrf_miwi/src/drv_mrf_miwi_89xa.c</itemPath>
             <itemPath>../../../../../../framework/driver/mrf_miwi/src/drv_mrf_miwi_crc.c</itemPath>
             <itemPath>../../../../../../framework/driver/mrf_miwi/src/drv_mrf_miwi_security.c</itemPath>
           </logicalFolder>
@@ -88,6 +85,8 @@
         <itemPath>../src/lib/i2c.c</itemPath>
         <itemPath>../src/lib/24LC01.c</itemPath>
         <itemPath>../src/lib/adc.c</itemPath>
+        <itemPath>../src/lib/tick.c</itemPath>
+        <itemPath>../src/lib/switches.c</itemPath>
       </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
@@ -119,12 +118,9 @@
           <itemPath>../src/system_config/miwi/symbol.c</itemPath>
         </logicalFolder>
       </logicalFolder>
-      <itemPath>../src/demo_ouput.c</itemPath>
-      <itemPath>../src/p2p_demo.c</itemPath>
       <itemPath>main.c</itemPath>
-      <itemPath>../src/mainmiwi.c</itemPath>
-      <itemPath>timerApp.c</itemPath>
-      <itemPath>timerControlApp.c</itemPath>
+      <itemPath>../src/demo_ouput.c</itemPath>
+      <itemPath>waterTimer.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -245,70 +241,6 @@
         </C30Global>
       </item>
       <item path="../../../../../../framework/driver/mrf_miwi/drv_mrf_miwi_security.h"
-            ex="true"
-            overriding="false">
-        <C30>
-        </C30>
-        <C30-AR>
-        </C30-AR>
-        <C30-AS>
-        </C30-AS>
-        <C30-CO>
-        </C30-CO>
-        <C30-LD>
-        </C30-LD>
-        <C30Global>
-        </C30Global>
-      </item>
-      <item path="../../../../../../framework/driver/mrf_miwi/src/drv_mrf_miwi_24xa.c"
-            ex="true"
-            overriding="false">
-        <C30>
-        </C30>
-        <C30-AR>
-        </C30-AR>
-        <C30-AS>
-        </C30-AS>
-        <C30-CO>
-        </C30-CO>
-        <C30-LD>
-        </C30-LD>
-        <C30Global>
-        </C30Global>
-      </item>
-      <item path="../../../../../../framework/driver/mrf_miwi/src/drv_mrf_miwi_24xa_proprietary.c"
-            ex="true"
-            overriding="false">
-        <C30>
-        </C30>
-        <C30-AR>
-        </C30-AR>
-        <C30-AS>
-        </C30-AS>
-        <C30-CO>
-        </C30-CO>
-        <C30-LD>
-        </C30-LD>
-        <C30Global>
-        </C30Global>
-      </item>
-      <item path="../../../../../../framework/driver/mrf_miwi/src/drv_mrf_miwi_49xa.c"
-            ex="true"
-            overriding="false">
-        <C30>
-        </C30>
-        <C30-AR>
-        </C30-AR>
-        <C30-AS>
-        </C30-AS>
-        <C30-CO>
-        </C30-CO>
-        <C30-LD>
-        </C30-LD>
-        <C30Global>
-        </C30Global>
-      </item>
-      <item path="../../../../../../framework/driver/mrf_miwi/src/drv_mrf_miwi_89xa.c"
             ex="true"
             overriding="false">
         <C30>
